@@ -3,6 +3,9 @@
     "type": "library",
     "description": "X-Hub-Signature webhook signing utility for PHP",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/compwright/x-hub-signature-php/issues"
+    },
     "authors": [
         {
             "name": "Jonathon Hill",
