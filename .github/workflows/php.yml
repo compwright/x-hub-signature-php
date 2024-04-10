@@ -5,15 +5,19 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  runner-job:
 
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['8.2', '8.3']
+
+    runs-on: ${{ matrix.operating-system }}
 
     steps:
     - uses: actions/checkout@v3
@@ -31,7 +35,7 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-      
+      run: composer install --no-progress
+
     - name: Run test suite
       run: make test
