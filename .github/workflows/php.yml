@@ -20,7 +20,16 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extensions: :xdebug
+        tools: composer
+        coverage: none
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
